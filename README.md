@@ -39,11 +39,11 @@ Two main types of web content can be scraped: static and dynamic. Static content
 
 To start, use your browser’s **Dev Tools** to identify the relevant HTML elements. Open **Dev Tools** by right-clicking the web page and selecting the **Inspect** option or pressing **F12** in Chrome.
 
-![DevTools in Chrome](https://brightdata.com/wp-content/uploads/2024/08/DevTools-in-Chrome-1024x576.png)
+![DevTools in Chrome](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/DevTools-in-Chrome-1024x576.png)
 
 The right side of the screen displays the code responsible for rendering the page. To locate the specific HTML element that handles each book’s data, search through the code using the hover-to-select option (the arrow in the top-left corner of the screen):
 
-![Hover-to-select option in Dev Tools](https://brightdata.com/wp-content/uploads/2024/08/Hover-to-select-option-in-Dev-Tools-1024x587.png)
+![Hover-to-select option in Dev Tools](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/Hover-to-select-option-in-Dev-Tools-1024x587.png)
 
 In **Dev Tools**, you should see the following code snippet:
 
@@ -111,7 +111,7 @@ python static_scrape.py
 
 This command generates a new file in your directory with the following output:
 
-![static_scrape.py JSON output](https://brightdata.com/wp-content/uploads/2024/08/static_scrape.py-JSON-output-1024x695.png)
+![static_scrape.py JSON output](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/static_scrape.py-JSON-output-1024x695.png)
 
 All the code for this script is available on [GitHub](https://gist.github.com/vivekthedev/c1c5f0fb0e23cabfa3fa5c364b939f7c).
 
@@ -127,7 +127,7 @@ YouTube is a great example of content rendered using JavaScript. Let's scrape da
 
 To begin, inspect the HTML code of the web page with **Dev Tools**:
 
-![FreeCodeCamp page on YouTube](https://brightdata.com/wp-content/uploads/2024/08/FreeCodeCamp-page-on-YouTube-1024x576.png)
+![FreeCodeCamp page on YouTube](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/FreeCodeCamp-page-on-YouTube-1024x576.png)
 
 The following code identifies the elements responsible for displaying the video title and link:
 
@@ -218,7 +218,7 @@ python dynamic_scrape.py
 
 After running the script, a new file named `videos.json` is created in your directory:
 
-![dynamic_scrape.py JSON output](https://brightdata.com/wp-content/uploads/2024/08/dynamic_scrape.py-JSON-output-1024x495.png)
+![dynamic_scrape.py JSON output](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/dynamic_scrape.py-JSON-output-1024x495.png)
 
 All the code for this script is also available on [GitHub](https://gist.github.com/vivekthedev/36489fbaf896eb7c06ebb9350dec298a).
 
@@ -228,7 +228,7 @@ Web scraping can face challenges like anti-scraping tools and rate limits. Proxy
 
 To start, obtain proxies from Bright Data by signing up for a free trial. After creating a Bright Data account, you’ll see the following dashboard:
 
-![Bright Data Dashboard](https://brightdata.com/wp-content/uploads/2024/08/Bright-Data-Dashboard-1024x461.png)
+![Bright Data Dashboard](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/Bright-Data-Dashboard-1024x461.png)
 
 Navigate to the **My Zones** option and create a new residential proxy. This will reveal your proxy username, password, and host, which you need in the next step.
 
