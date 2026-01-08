@@ -1,51 +1,51 @@
-# Web Scraping with lxml
+# lxml로 Webスクレイピング
 
-[![Bright Data Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.com/)
+[![Bright Data Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
 
-This guide explains how to use the `lxml` package in Python to parse static and dynamic content, overcome common challenges, and streamline your data extraction process.
+이 가이드는 Python에서 `lxml` 패키지를 사용하여 정적 및 동적 콘텐츠를 파싱하고, 일반적인 과제를 극복하며, 데이터 추출 프로세스를 간소화하는 방법을 설명합니다.
 
-- [Using lxml for Web Scraping in Python](#using-lxml-for-web-scraping-in-python)
-- [Prerequisites](#prerequisites)
-- [Parsing Static HTML Content](#parsing-static-html-content)
-- [Parsing Dynamic HTML Content](#parsing-dynamic-html-content)
-- [Using lxml with Bright Data Proxy](#using-lxml-with-bright-data-proxy)
+- [Python에서 lxml로 Webスクレイピング 사용하기](#using-lxml-for-web-scraping-in-python)
+- [사전 준비 사항](#prerequisites)
+- [정적 HTML 콘텐츠 파싱](#parsing-static-html-content)
+- [동적 HTML 콘텐츠 파싱](#parsing-dynamic-html-content)
+- [Bright Data プロキシ와 함께 lxml 사용하기](#using-lxml-with-bright-data-proxy)
 
 ## Using lxml for Web Scraping in Python
 
-On the web, structured and hierarchical data can be represented in two formats—HTML and XML:
+웹에서 구조적이고 계층적인 데이터는 HTML과 XML의 두 가지 형식으로 표현될 수 있습니다:
 
-- **XML** is a basic structure that does not come with prebuilt tags and styles. The coder creates the structure by defining its own tags. The tag’s main purpose is to create a standard data structure that can be understood between different systems.
-- **HTML** is a web markup language with predefined tags. These tags come with some styling properties, such as `font-size` in `<h1>` tags or `display` for `<img />` tags. HTML’s primary function is to structure web pages effectively.
+- **XML**은 사전 구축된 태그와 스타일이 없는 기본 구조입니다. 개발자가 자체 태그를 정의하여 구조를 만듭니다. 태그의 주요 목적은 서로 다른 시스템 간에 이해될 수 있는 표준 데이터 구조를 만드는 것입니다.
+- **HTML**은 미리 정의된 태그를 갖는 웹 마크업 언어입니다. 이러한 태그에는 `<h1>` 태그의 `font-size` 또는 `<img />` 태그의 `display`와 같은 일부 스타일 속성이 포함됩니다. HTML의 주요 기능은 웹 페이지를 효과적으로 구조화하는 것입니다.
 
-lxml works with both HTML and XML documents.
+lxml은 HTML과 XML 문서 모두에서 작동합니다.
 
 ### Prerequisites
 
-Before you can start web scraping with lxml, you need to install a few libraries on your machine:
+lxml로 Webスクレイピング을 시작하기 전에, 머신에 몇 가지 라이브러리를 설치해야 합니다:
 
 ```sh
 pip install lxml requests cssselect
 ```
 
-This command installs the following:
+이 명령은 다음을 설치합니다:
 
-- `lxml` to parse XML and HTML
-- `requests` for fetching web pages
-- `cssselect`, which uses CSS selectors to extract HTML elements
+- XML 및 HTML을 파싱하기 위한 `lxml`
+- 웹 페이지를 가져오기 위한 `requests`
+- CSS 선택자를 사용하여 HTML 요소를 추출하는 `cssselect`
 
 ### Parsing Static HTML Content
 
-Two main types of web content can be scraped: static and dynamic. Static content is embedded in the HTML document when the web page initially loads, making it easy to scrape. In contrast, dynamic content is loaded continuously or triggered by JavaScript after the initial page load.
+スクレイピング할 수 있는 웹 콘텐츠는 크게 정적과 동적의 두 가지 유형이 있습니다. 정적 콘텐츠는 웹 페이지가 처음 로드될 때 HTML 문서에 포함되어 있어 スクレイピング이 쉽습니다. 반면 동적 콘텐츠는 초기 페이지 로드 이후 JavaScript에 의해 지속적으로 로드되거나 트리거됩니다.
 
-To start, use your browser’s **Dev Tools** to identify the relevant HTML elements. Open **Dev Tools** by right-clicking the web page and selecting the **Inspect** option or pressing **F12** in Chrome.
+먼저, 브라우저의 **Dev Tools**를 사용하여 관련 HTML 요소를 식별합니다. 웹 페이지에서 마우스 오른쪽 버튼을 클릭하고 **Inspect** 옵션을 선택하거나 Chrome에서 **F12**를 눌러 **Dev Tools**를 엽니다.
 
 ![DevTools in Chrome](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/DevTools-in-Chrome-1024x576.png)
 
-The right side of the screen displays the code responsible for rendering the page. To locate the specific HTML element that handles each book’s data, search through the code using the hover-to-select option (the arrow in the top-left corner of the screen):
+화면 오른쪽에는 페이지 렌더링을 담당하는 코드가 표시됩니다. 각 책의 데이터를 처리하는 특정 HTML 요소를 찾으려면 hover-to-select 옵션(화면 좌측 상단의 화살표)을 사용하여 코드를 탐색합니다:
 
 ![Hover-to-select option in Dev Tools](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/Hover-to-select-option-in-Dev-Tools-1024x587.png)
 
-In **Dev Tools**, you should see the following code snippet:
+**Dev Tools**에서 다음 코드 스니펫을 확인할 수 있습니다:
 
 ```html
 <article class="product_pod">
@@ -58,7 +58,7 @@ In **Dev Tools**, you should see the following code snippet:
     </article>
 ```
 
-Create a new file named `static_scrape.py` and input the following code:
+`static_scrape.py`라는 새 파일을 만들고 다음 코드를 입력합니다:
 
 ```python
 import requests
@@ -70,7 +70,7 @@ URL = "https://books.toscrape.com/"
 content = requests.get(URL).text
 ```
 
-Next, parse the HTML and extract data:
+다음으로, HTML을 파싱하고 데이터를 추출합니다:
 
 ```python
 parsed = html.fromstring(content)
@@ -78,9 +78,9 @@ all_books = parsed.xpath('//article[@class="product_pod"]')
 books = []
 ```
 
-This code initializes the `parsed` variable using `html.fromstring(content)`, which parses the HTML content into a hierarchical tree structure. The `all_books` variable uses an XPath selector to retrieve all `<article>` tags with the class `product_pod` from the web page. This syntax is specifically valid for XPath expressions.
+이 코드는 `html.fromstring(content)`를 사용하여 `parsed` 변수를 초기화하며, 이는 HTML 콘텐츠를 계층적 트리 구조로 파싱합니다. `all_books` 변수는 XPath 선택자를 사용하여 웹 페이지에서 class가 `product_pod`인 모든 `<article>` 태그를 가져옵니다. 이 문법은 XPath 표현식에 대해 특히 유효합니다.
 
-Next, iterate through the books and extract titles and prices:
+다음으로, 책 목록을 반복하면서 제목과 가격을 추출합니다:
 
 ```python
 for book in all_books:
@@ -90,46 +90,46 @@ for book in all_books:
 
 ```
 
-The `book_title` variable is defined using an XPath selector that retrieves the `title` attribute from an `<a>` tag within an `<h3>` tag. The dot (`.`) at the beginning of the XPath expression specifies that the search should start from the `<article>` tag rather than the default starting point. 
+`book_title` 변수는 `<h3>` 태그 내부의 `<a>` 태그에서 `title` 속성을 가져오는 XPath 선택자를 사용하여 정의됩니다. XPath 표현식 시작의 점(`.`)은 기본 시작점이 아니라 `<article>` 태그부터 검색을 시작하도록 지정합니다. 
 
-The next line uses the `cssselect` method to extract the price from a `<p>` tag with the class `price_color`. Since `cssselect` returns a list, indexing (`[0]`) accesses the first element, and `text_content()` retrieves the text inside the element. 
+다음 줄에서는 `cssselect` 메서드를 사용하여 class가 `price_color`인 `<p>` 태그에서 가격을 추출합니다. `cssselect`는 리스트를 반환하므로 인덱싱(``[0]``)을 통해 첫 번째 요소에 접근하며, `text_content()`는 요소 내부의 텍스트를 가져옵니다. 
 
-Each extracted title and price pair is then appended to the `books` list as a dictionary, which can be easily stored in a JSON file.
+추출된 각 제목과 가격 쌍은 딕셔너리 형태로 `books` 리스트에 추가되며, 이는 JSON 파일에 쉽게 저장할 수 있습니다.
 
-Now, save the extracted data as a JSON file:
+이제 추출한 데이터를 JSON 파일로 저장합니다:
 
 ```python
 with open("books.json", "w", encoding="utf-8") as file:
     json.dump(books, file)
 ```
 
-Run the script:
+스크립트를 실행합니다:
 
 ```sh
 python static_scrape.py
 ```
 
-This command generates a new file in your directory with the following output:
+이 명령은 디렉터리에 다음 출력이 포함된 새 파일을 생성합니다:
 
 ![static_scrape.py JSON output](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/static_scrape.py-JSON-output-1024x695.png)
 
-All the code for this script is available on [GitHub](https://gist.github.com/vivekthedev/c1c5f0fb0e23cabfa3fa5c364b939f7c).
+이 스크립트의 전체 코드는 [GitHub](https://gist.github.com/vivekthedev/c1c5f0fb0e23cabfa3fa5c364b939f7c)에서 확인할 수 있습니다.
 
 ### Parsing Dynamic HTML Content
 
-To scrape dynamic content, install [Selenium](https://www.selenium.dev/):
+동적 콘텐츠를 スクレイピング하려면 [Selenium](https://www.selenium.dev/)을 설치합니다:
 
 ```sh
 pip install selenium
 ```
 
-YouTube is a great example of content rendered using JavaScript. Let's scrape data for the top hundred videos from the [freeCodeCamp.org YouTube channel](https://www.youtube.com/c/Freecodecamp) by emulating keyboard presses to scroll the page.
+YouTube는 JavaScript로 렌더링되는 콘텐츠의 훌륭한 예입니다. 키보드 입력을 에뮬레이션하여 페이지를 스크롤하는 방식으로, [freeCodeCamp.org YouTube channel](https://www.youtube.com/c/Freecodecamp)에서 상위 100개 비디오 데이터를 スクレイピング해 보겠습니다.
 
-To begin, inspect the HTML code of the web page with **Dev Tools**:
+먼저 **Dev Tools**로 웹 페이지의 HTML 코드를 검사합니다:
 
 ![FreeCodeCamp page on YouTube](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/FreeCodeCamp-page-on-YouTube-1024x576.png)
 
-The following code identifies the elements responsible for displaying the video title and link:
+다음 코드는 비디오 제목과 링크를 표시하는 요소를 식별합니다:
 
 ```html
 <a id="video-title-link" class="yt-simple-endpoint focus-on-expand style-scope ytd-rich-grid-media" href="/watch?v=i740xlsqxEM">
@@ -137,9 +137,9 @@ The following code identifies the elements responsible for displaying the video 
 </yt-formatted-string></a>
 ```
 
-The video title is within the `yt-formatted-string` tag with the ID `video-title`, and the video link is located in the `href` attribute of the `a` tag with the ID `video-title-link`.
+비디오 제목은 ID가 `video-title`인 `yt-formatted-string` 태그 안에 있으며, 비디오 링크는 ID가 `video-title-link`인 `a` 태그의 `href` 속성에 있습니다.
 
-Create `dynamic_scrape.py` and import required modules:
+`dynamic_scrape.py`를 만들고 필요한 모듈을 import합니다:
 
 ```python
 from selenium import webdriver
@@ -153,7 +153,7 @@ import json
 
 ```
 
-Define the browser driver:
+브라우저 드라이버를 정의합니다:
 
 ```python
 URL = "https://www.youtube.com/@freecodecamp/videos"
@@ -164,13 +164,13 @@ driver.get(URL)
 sleep(3)
 ```
 
-Similar to the previous script, you declare a `URL` variable containing the web URL that you want to scrape and a `videos` variable that stores all the data as a list. 
+이전 스크립트와 마찬가지로, スクレイピング할 웹 URL을 담은 `URL` 변수를 선언하고 모든 데이터를 리스트로 저장할 `videos` 변수를 선언합니다. 
 
-Next, a `driver` variable is declared (_i.e._, a `Chrome` instance) that you use to interact with the browser. The `get()` function opens the browser instance and sends a request to the specified `URL`. 
+다음으로 브라우저와 상호작용하는 데 사용할 `driver` 변수(즉, `Chrome` 인스턴스)를 선언합니다. `get()` 함수는 브라우저 인스턴스를 열고 지정된 `URL`로 리クエスト를 보냅니다. 
 
-After that, you call the `sleep` function to wait for three seconds before accessing any element on the web page to ensure all the HTML code is loaded in the browser.
+그 후 웹 페이지의 모든 HTML 코드가 브라우저에 로드되었는지 확인하기 위해, 페이지의 어떤 요소에도 접근하기 전에 `sleep` 함수를 호출하여 3초 동안 대기합니다.
 
-Now, emulate scrolling down to load more videos:
+이제 더 많은 비디오를 로드하기 위해 아래로 스크롤을 에뮬레이션합니다:
 
 ```python
 parent = driver.find_element(By.TAG_NAME, 'html')
@@ -179,9 +179,9 @@ for i in range(4):
     sleep(3)
 ```
 
-The `send_keys` method simulates pressing the `END` key to scroll to the bottom of the page, triggering more videos to load. This action is repeated four times within a `for` loop to ensure enough videos are loaded. The `sleep` function pauses for three seconds after each scroll to allow the videos to load before scrolling again.
+`send_keys` 메서드는 `END` 키를 누르는 동작을 시뮬레이션하여 페이지 하단으로 스크롤하고, 추가 비디오 로드를 트리거합니다. 이 동작은 `for` 루프 내에서 4번 반복되어 충분한 비디오가 로드되도록 합니다. `sleep` 함수는 각 스크롤 후 3초 동안 일시 정지하여, 다시 스크롤하기 전에 비디오가 로드될 시간을 확보합니다.
 
-Next, extract video titles and links:
+다음으로, 비디오 제목과 링크를 추출합니다:
 
 ```python
 html_data = html.fromstring(driver.page_source)
@@ -194,15 +194,15 @@ for video in videos_html:
     videos.append( {"title": title, "link": link} )
 ```
 
-In this code, you pass the HTML content from the driver’s `page_source` attribute to the `fromstring` method, which builds a hierarchical tree of the HTML. 
+이 코드에서는 driver의 `page_source` 속성에서 얻은 HTML 콘텐츠를 `fromstring` 메서드에 전달하여 HTML의 계층적 트리를 구성합니다. 
 
-Then, you select all `<a>` tags with the ID `video-title-link` using CSS selectors, where the `#` sign indicates selection using the tag’s ID. This selection returns a list of elements that satisfy the given criteria. 
+그런 다음 CSS 선택자를 사용하여 ID가 `video-title-link`인 모든 `<a>` 태그를 선택하며, 여기서 `#` 기호는 태그의 ID를 사용해 선택함을 의미합니다. 이 선택은 지정된 조건을 만족하는 요소 리스트를 반환합니다. 
 
-The code then iterates over each element to extract the title and link. The `text_content` method retrieves the inner text (the video title), while the `get` method fetches the `href` attribute value (the video link). 
+이후 각 요소를 반복하여 제목과 링크를 추출합니다. `text_content` 메서드는 내부 텍스트(비디오 제목)를 가져오고, `get` 메서드는 `href` 속성 값(비디오 링크)을 가져옵니다. 
 
-Finally, the data is stored in a list called `videos`.
+마지막으로 데이터는 `videos`라는 리스트에 저장됩니다.
 
-Now, save the data as a JSON file and close the driver:
+이제 데이터를 JSON 파일로 저장하고 driver를 닫습니다:
 
 ```python
 with open('videos.json', 'w') as file:
@@ -210,29 +210,29 @@ with open('videos.json', 'w') as file:
 driver.close()
 ```
 
-Run the script:
+스크립트를 실행합니다:
 
 ```sh
 python dynamic_scrape.py
 ```
 
-After running the script, a new file named `videos.json` is created in your directory:
+스크립트를 실행하면 디렉터리에 `videos.json`이라는 새 파일이 생성됩니다:
 
 ![dynamic_scrape.py JSON output](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/dynamic_scrape.py-JSON-output-1024x495.png)
 
-All the code for this script is also available on [GitHub](https://gist.github.com/vivekthedev/36489fbaf896eb7c06ebb9350dec298a).
+이 스크립트의 전체 코드도 [GitHub](https://gist.github.com/vivekthedev/36489fbaf896eb7c06ebb9350dec298a)에서 확인할 수 있습니다.
 
 ### Using lxml with Bright Data Proxy
 
-Web scraping can face challenges like anti-scraping tools and rate limits. Proxy servers help by masking the user’s IP address. Bright Data provides reliable proxy services.
+Webスクレイピング은 アンチボット 도구나 レート制限 같은 문제에 직면할 수 있습니다. プロキシ 서버는 사용자의 IPアドレス를 마스킹하여 도움을 줍니다. Bright Data는 신뢰할 수 있는 プロキシ 서비스를 제공합니다.
 
-To start, obtain proxies from Bright Data by signing up for a free trial. After creating a Bright Data account, you’ll see the following dashboard:
+시작하려면 무료 체험에 가입하여 Bright Data에서 プロキシ를 얻습니다. Bright Data 계정을 생성한 후에는 다음 대시보드를 확인할 수 있습니다:
 
 ![Bright Data Dashboard](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/Bright-Data-Dashboard-1024x461.png)
 
-Navigate to the **My Zones** option and create a new [residential proxy](https://brightdata.com/proxy-types/residential-proxies). This will reveal your proxy username, password, and host, which you need in the next step.
+**My Zones** 옵션으로 이동하여 새로운 [residential proxy](https://brightdata.co.kr/proxy-types/residential-proxies)를 생성합니다. 그러면 다음 단계에서 필요한 プロキシ 사용자 이름, 비밀번호, 호스트가 표시됩니다.
 
-Next, modify `static_scrape.py` by adding the following code below the URL variable:
+다음으로 URL 변수 아래에 다음 코드를 추가하여 `static_scrape.py`를 수정합니다:
 
 ```python
 URL = "https://books.toscrape.com/"
@@ -250,18 +250,18 @@ proxies = {
 content = requests.get(URL, proxies=proxies).text
 ```
 
-Replace placeholders with your Bright Data credentials and run the script:
+플레이스홀더를 Bright Data 자격 증명으로 교체하고 스크립트를 실행합니다:
 
 ```sh
 python static_scrape.py
 ```
 
-After running this script, you’ll see a similar output to what you received in the previous example.
+이 스크립트를 실행하면 이전 예시에서 받은 것과 유사한 출력을 확인할 수 있습니다.
 
-You can view this entire script on [GitHub](https://gist.github.com/vivekthedev/201f994bc14e4dbc7263b03983f917b3).
+이 전체 스크립트는 [GitHub](https://gist.github.com/vivekthedev/201f994bc14e4dbc7263b03983f917b3)에서 확인할 수 있습니다.
 
 ## Conclusion
 
-Using lxml with Python enables efficient web scraping, but it can be time-consuming. Bright Data offers an efficient alternative with its ready-to-use [datasets](https://brightdata.com/products/datasets) and [Web Scraper API](https://brightdata.com/products/web-scraper).
+Python에서 lxml을 사용하면 효율적인 Webスクレイピング이 가능하지만, 시간이 많이 소요될 수 있습니다. Bright Data는 바로 사용할 수 있는 [datasets](https://brightdata.co.kr/products/datasets)와 [Web Scraper API](https://brightdata.co.kr/products/web-scraper)를 통해 효율적인 대안을 제공합니다.
 
-Try Bright Data for free!
+Bright Data를 무료로 사용해 보세요!
