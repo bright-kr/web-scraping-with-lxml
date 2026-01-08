@@ -1,6 +1,6 @@
 # lxml로 Webスクレイピング
 
-[![Bright Data Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
+[![Bright Data Promo](https://github.com/bright-kr/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
 
 이 가이드는 Python에서 `lxml` 패키지를 사용하여 정적 및 동적 콘텐츠를 파싱하고, 일반적인 과제를 극복하며, 데이터 추출 프로세스를 간소화하는 방법을 설명합니다.
 
@@ -39,11 +39,11 @@ pip install lxml requests cssselect
 
 먼저, 브라우저의 **Dev Tools**를 사용하여 관련 HTML 요소를 식별합니다. 웹 페이지에서 마우스 오른쪽 버튼을 클릭하고 **Inspect** 옵션을 선택하거나 Chrome에서 **F12**를 눌러 **Dev Tools**를 엽니다.
 
-![DevTools in Chrome](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/DevTools-in-Chrome-1024x576.png)
+![DevTools in Chrome](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/DevTools-in-Chrome-1024x576.png)
 
 화면 오른쪽에는 페이지 렌더링을 담당하는 코드가 표시됩니다. 각 책의 데이터를 처리하는 특정 HTML 요소를 찾으려면 hover-to-select 옵션(화면 좌측 상단의 화살표)을 사용하여 코드를 탐색합니다:
 
-![Hover-to-select option in Dev Tools](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/Hover-to-select-option-in-Dev-Tools-1024x587.png)
+![Hover-to-select option in Dev Tools](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/Hover-to-select-option-in-Dev-Tools-1024x587.png)
 
 **Dev Tools**에서 다음 코드 스니펫을 확인할 수 있습니다:
 
@@ -111,7 +111,7 @@ python static_scrape.py
 
 이 명령은 디렉터리에 다음 출력이 포함된 새 파일을 생성합니다:
 
-![static_scrape.py JSON output](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/static_scrape.py-JSON-output-1024x695.png)
+![static_scrape.py JSON output](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/static_scrape.py-JSON-output-1024x695.png)
 
 이 스크립트의 전체 코드는 [GitHub](https://gist.github.com/vivekthedev/c1c5f0fb0e23cabfa3fa5c364b939f7c)에서 확인할 수 있습니다.
 
@@ -127,7 +127,7 @@ YouTube는 JavaScript로 렌더링되는 콘텐츠의 훌륭한 예입니다. �
 
 먼저 **Dev Tools**로 웹 페이지의 HTML 코드를 검사합니다:
 
-![FreeCodeCamp page on YouTube](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/FreeCodeCamp-page-on-YouTube-1024x576.png)
+![FreeCodeCamp page on YouTube](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/FreeCodeCamp-page-on-YouTube-1024x576.png)
 
 다음 코드는 비디오 제목과 링크를 표시하는 요소를 식별합니다:
 
@@ -218,7 +218,7 @@ python dynamic_scrape.py
 
 스크립트를 실행하면 디렉터리에 `videos.json`이라는 새 파일이 생성됩니다:
 
-![dynamic_scrape.py JSON output](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/dynamic_scrape.py-JSON-output-1024x495.png)
+![dynamic_scrape.py JSON output](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/dynamic_scrape.py-JSON-output-1024x495.png)
 
 이 스크립트의 전체 코드도 [GitHub](https://gist.github.com/vivekthedev/36489fbaf896eb7c06ebb9350dec298a)에서 확인할 수 있습니다.
 
@@ -228,7 +228,7 @@ Webスクレイピング은 アンチボット 도구나 レート制限 같은 
 
 시작하려면 무료 체험에 가입하여 Bright Data에서 プロキシ를 얻습니다. Bright Data 계정을 생성한 후에는 다음 대시보드를 확인할 수 있습니다:
 
-![Bright Data Dashboard](https://github.com/luminati-io/web-scraping-with-lxml/blob/main/images/Bright-Data-Dashboard-1024x461.png)
+![Bright Data Dashboard](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/Bright-Data-Dashboard-1024x461.png)
 
 **My Zones** 옵션으로 이동하여 새로운 [residential proxy](https://brightdata.co.kr/proxy-types/residential-proxies)를 생성합니다. 그러면 다음 단계에서 필요한 プロキシ 사용자 이름, 비밀번호, 호스트가 표시됩니다.
 
