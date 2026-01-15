@@ -1,14 +1,14 @@
-# lxml로 Webスクレイピング
+# lxml로 Web스크레이핑
 
 [![Bright Data Promo](https://github.com/bright-kr/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
 
 이 가이드는 Python에서 `lxml` 패키지를 사용하여 정적 및 동적 콘텐츠를 파싱하고, 일반적인 과제를 극복하며, 데이터 추출 프로세스를 간소화하는 방법을 설명합니다.
 
-- [Python에서 lxml로 Webスクレイピング 사용하기](#using-lxml-for-web-scraping-in-python)
+- [Python에서 lxml로 Web스크레이핑 사용하기](#using-lxml-for-web-scraping-in-python)
 - [사전 준비 사항](#prerequisites)
 - [정적 HTML 콘텐츠 파싱](#parsing-static-html-content)
 - [동적 HTML 콘텐츠 파싱](#parsing-dynamic-html-content)
-- [Bright Data プロキシ와 함께 lxml 사용하기](#using-lxml-with-bright-data-proxy)
+- [Bright Data 프록시와 함께 lxml 사용하기](#using-lxml-with-bright-data-proxy)
 
 ## Using lxml for Web Scraping in Python
 
@@ -21,7 +21,7 @@ lxml은 HTML과 XML 문서 모두에서 작동합니다.
 
 ### Prerequisites
 
-lxml로 Webスクレイピング을 시작하기 전에, 머신에 몇 가지 라이브러리를 설치해야 합니다:
+lxml로 Web스크레이핑을 시작하기 전에, 머신에 몇 가지 라이브러리를 설치해야 합니다:
 
 ```sh
 pip install lxml requests cssselect
@@ -35,7 +35,7 @@ pip install lxml requests cssselect
 
 ### Parsing Static HTML Content
 
-スクレイピング할 수 있는 웹 콘텐츠는 크게 정적과 동적의 두 가지 유형이 있습니다. 정적 콘텐츠는 웹 페이지가 처음 로드될 때 HTML 문서에 포함되어 있어 スクレイピング이 쉽습니다. 반면 동적 콘텐츠는 초기 페이지 로드 이후 JavaScript에 의해 지속적으로 로드되거나 트리거됩니다.
+스크레이핑할 수 있는 웹 콘텐츠는 크게 정적과 동적의 두 가지 유형이 있습니다. 정적 콘텐츠는 웹 페이지가 처음 로드될 때 HTML 문서에 포함되어 있어 스크레이핑이 쉽습니다. 반면 동적 콘텐츠는 초기 페이지 로드 이후 JavaScript에 의해 지속적으로 로드되거나 트리거됩니다.
 
 먼저, 브라우저의 **Dev Tools**를 사용하여 관련 HTML 요소를 식별합니다. 웹 페이지에서 마우스 오른쪽 버튼을 클릭하고 **Inspect** 옵션을 선택하거나 Chrome에서 **F12**를 눌러 **Dev Tools**를 엽니다.
 
@@ -117,13 +117,13 @@ python static_scrape.py
 
 ### Parsing Dynamic HTML Content
 
-동적 콘텐츠를 スクレイピング하려면 [Selenium](https://www.selenium.dev/)을 설치합니다:
+동적 콘텐츠를 스크레이핑하려면 [Selenium](https://www.selenium.dev/)을 설치합니다:
 
 ```sh
 pip install selenium
 ```
 
-YouTube는 JavaScript로 렌더링되는 콘텐츠의 훌륭한 예입니다. 키보드 입력을 에뮬레이션하여 페이지를 스크롤하는 방식으로, [freeCodeCamp.org YouTube channel](https://www.youtube.com/c/Freecodecamp)에서 상위 100개 비디오 데이터를 スクレイピング해 보겠습니다.
+YouTube는 JavaScript로 렌더링되는 콘텐츠의 훌륭한 예입니다. 키보드 입력을 에뮬레이션하여 페이지를 스크롤하는 방식으로, [freeCodeCamp.org YouTube channel](https://www.youtube.com/c/Freecodecamp)에서 상위 100개 비디오 데이터를 스크레이핑해 보겠습니다.
 
 먼저 **Dev Tools**로 웹 페이지의 HTML 코드를 검사합니다:
 
@@ -164,7 +164,7 @@ driver.get(URL)
 sleep(3)
 ```
 
-이전 스크립트와 마찬가지로, スクレイピング할 웹 URL을 담은 `URL` 변수를 선언하고 모든 데이터를 리스트로 저장할 `videos` 변수를 선언합니다. 
+이전 스크립트와 마찬가지로, 스크레이핑할 웹 URL을 담은 `URL` 변수를 선언하고 모든 데이터를 리스트로 저장할 `videos` 변수를 선언합니다. 
 
 다음으로 브라우저와 상호작용하는 데 사용할 `driver` 변수(즉, `Chrome` 인스턴스)를 선언합니다. `get()` 함수는 브라우저 인스턴스를 열고 지정된 `URL`로 리クエスト를 보냅니다. 
 
@@ -224,13 +224,13 @@ python dynamic_scrape.py
 
 ### Using lxml with Bright Data Proxy
 
-Webスクレイピング은 アンチボット 도구나 レート制限 같은 문제에 직면할 수 있습니다. プロキシ 서버는 사용자의 IPアドレス를 마스킹하여 도움을 줍니다. Bright Data는 신뢰할 수 있는 プロキシ 서비스를 제공합니다.
+Web스크레이핑은 안티봇 도구나 속도 제한 같은 문제에 직면할 수 있습니다. 프록시 서버는 사용자의 IP 주소를 마스킹하여 도움을 줍니다. Bright Data는 신뢰할 수 있는 프록시 서비스를 제공합니다.
 
-시작하려면 무료 체험에 가입하여 Bright Data에서 プロキシ를 얻습니다. Bright Data 계정을 생성한 후에는 다음 대시보드를 확인할 수 있습니다:
+시작하려면 무료 체험에 가입하여 Bright Data에서 프록시를 얻습니다. Bright Data 계정을 생성한 후에는 다음 대시보드를 확인할 수 있습니다:
 
 ![Bright Data Dashboard](https://github.com/bright-kr/web-scraping-with-lxml/blob/main/images/Bright-Data-Dashboard-1024x461.png)
 
-**My Zones** 옵션으로 이동하여 새로운 [residential proxy](https://brightdata.co.kr/proxy-types/residential-proxies)를 생성합니다. 그러면 다음 단계에서 필요한 プロキシ 사용자 이름, 비밀번호, 호스트가 표시됩니다.
+**My Zones** 옵션으로 이동하여 새로운 [residential proxy](https://brightdata.co.kr/proxy-types/residential-proxies)를 생성합니다. 그러면 다음 단계에서 필요한 프록시 사용자 이름, 비밀번호, 호스트가 표시됩니다.
 
 다음으로 URL 변수 아래에 다음 코드를 추가하여 `static_scrape.py`를 수정합니다:
 
@@ -262,6 +262,6 @@ python static_scrape.py
 
 ## Conclusion
 
-Python에서 lxml을 사용하면 효율적인 Webスクレイピング이 가능하지만, 시간이 많이 소요될 수 있습니다. Bright Data는 바로 사용할 수 있는 [datasets](https://brightdata.co.kr/products/datasets)와 [Web Scraper API](https://brightdata.co.kr/products/web-scraper)를 통해 효율적인 대안을 제공합니다.
+Python에서 lxml을 사용하면 효율적인 Web스크레이핑이 가능하지만, 시간이 많이 소요될 수 있습니다. Bright Data는 바로 사용할 수 있는 [datasets](https://brightdata.co.kr/products/datasets)와 [Web Scraper API](https://brightdata.co.kr/products/web-scraper)를 통해 효율적인 대안을 제공합니다.
 
 Bright Data를 무료로 사용해 보세요!
